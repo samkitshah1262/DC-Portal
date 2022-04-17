@@ -15,7 +15,7 @@ from django.contrib.auth import logout as auth_logout
 from accounts.models import user_type, User
 
 def signup(request):
-    if (request.method == 'POST'):
+    if (request.method == 'POST'):                  #submitted form info to make a user in the database 
         email = request.POST.get('email')
         password = request.POST.get('password')
         st = request.POST.get('student')
@@ -64,11 +64,11 @@ def login(request):
 
 
 def logout(request):
-    if request.method=='POST':
+    if request.method=='POST':      #logout form
         auth_logout(request)
         return redirect('accounts:login')
 
-def shome(request):
+def shome(request):                                                                                     #view function to redirect to student home
     if request.user.is_authenticated and user_type.objects.get(user=request.user).is_student:
         return render(request,'accounts/student_home.html')
     elif request.user.is_authenticated and user_type.objects.get(user=request.user).is_teach:
@@ -76,7 +76,7 @@ def shome(request):
     else:
         return redirect('accounts:login')
                       
-def thome(request):
+def thome(request):                                                                                     #view function to redirect to teacher home
     if request.user.is_authenticated and user_type.objects.get(user=request.user).is_teach:
         return render(request,'accounts/teacher_home.html')
     elif request.user.is_authenticated and user_type.objects.get(user=request.user).is_student:

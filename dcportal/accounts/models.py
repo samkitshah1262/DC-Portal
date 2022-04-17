@@ -7,6 +7,11 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 # from django.db import models
 from django.utils import timezone
 
+
+#  two types of accounts creation 1 student 2 teacher
+# we can not use in-bulit django accounts as no email auhtentication system
+# so we create custiom user model as well as a user type model
+
 class UserManager(BaseUserManager):
 
     def _create_user(self, email, password, is_staff, is_superuser, **extra_fields):
